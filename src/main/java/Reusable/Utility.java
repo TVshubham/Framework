@@ -38,10 +38,16 @@ public class Utility {
                 Actions act=new Actions(driver);
                 act.moveToElement( ele).click().build().perform();
             } catch (Exception e1) {
+                try{
+                    System.out.println("Trying with JS Click");
+                    JavascriptExecutor js=(JavascriptExecutor)driver;
+                    js.executeScript("arguments[0].click()", ele);
+                } catch (Exception ex) {
+                    ex.getMessage();
+                    ex.printStackTrace();
 
-                System.out.println("Trying with JS Click");
-                JavascriptExecutor js=(JavascriptExecutor)driver;
-                js.executeScript("arguments[0].click()", ele);
+
+                }
             }
 
         }

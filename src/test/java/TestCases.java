@@ -1,6 +1,7 @@
 import Base.BaseClass;
 import Pages.API_List_Page;
 import Pages.HomePage;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
@@ -13,7 +14,9 @@ public class TestCases extends BaseClass {
 
 
     @Test
-    public void testcase1() {
+    public void testcase1() throws InterruptedException {
+
+
         HomePage home = new HomePage(driver);
         WaitForVisibilityOfElement(driver ,home.API_List_tab );
         clickElement(driver ,home.API_List_tab);
@@ -23,9 +26,10 @@ public class TestCases extends BaseClass {
         apiListPage.Verify_API_1_getAPIDetails();
         WaitForVisibilityOfElement(driver , apiListPage.API_2 );
         clickElement(driver , apiListPage.API_2);
-
-
-
+        apiListPage.Verify_API_2_Post_APIDetails();
+        WaitForVisibilityOfElement(driver , apiListPage.API_3 );
+        clickElement(driver , apiListPage.API_3);
+        apiListPage.Verify_API_3_Get_APIDetails();
 
 
     }
