@@ -105,6 +105,14 @@ public class HomePage {
     @FindBy(xpath = "//button[text()='Continue Shopping']")
     private WebElement   Continue_Shopping_Button;
 
+    @FindBy(xpath="//u[text()='View Cart']")
+    private WebElement ViewCart_button;
+
+    @FindBy(xpath="//tr[contains(@id,'prod')]")
+    private List<WebElement> Product_Added_toCart_List;
+
+    @FindBy(xpath="//a[text()='Proceed To Checkout']")
+    private WebElement  Proceed_to_Checkout;
 
 
 
@@ -182,8 +190,7 @@ public class HomePage {
 
 
 
-    public boolean check_VisibiltiyOf_Tshirt(String productname)
-    {
+    public void check_Shopping_Cart_Flow (String productname,String productname2) throws InterruptedException {
         WebElement product = driver.findElement(By.xpath("//img[@alt='ecommerce website products']/..//p[text()='"+productname+"']"));
         WaitForVisibilityOfElement(driver ,  product  );
         scrollToElement(driver, product);
@@ -194,6 +201,9 @@ public class HomePage {
         WebElement View_product_details =driver.findElement(By.xpath("   //img[@alt='ecommerce website products']/..//p[text()='"+productname+"']/../../following-sibling::div/ul/li/a"));
         WaitForVisibilityOfElement(driver ,View_product_details);
 
+      Assert.assertTrue(  product.isDisplayed()
+                && View_product_details.isDisplayed()
+                &&Add_to_CartButton.isDisplayed());
         Actions actions = new Actions(driver);
         // Perform the hover action
         actions.moveToElement(product).perform();
@@ -203,27 +213,39 @@ public class HomePage {
         WaitForVisibilityOfElement(driver , Added_Message);
         Assert.assertTrue(Added_Message.isDisplayed());
 
-//        WaitForVisibilityOfElement(driver ,Continue_Shopping_Button);
-//        clickElement(driver,Continue_Shopping_Button);
-//
-//        WebElement Add_to_CartButton2 =driver.findElement(By.xpath("   //img[@alt='ecommerce website products']/..//p[text()='Green Side Placket Detail T-Shirt']/../a"));
-//        WaitForVisibilityOfElement(driver ,  Add_to_CartButton2  );
+        WaitForVisibilityOfElement(driver ,Continue_Shopping_Button);
+        clickElement(driver,Continue_Shopping_Button);
 
+        WebElement product2 = driver.findElement(By.xpath("//img[@alt='ecommerce website products']/..//p[text()='"+productname2+"']"));
+        WaitForVisibilityOfElement(driver ,  product2  );
+        // Perform the hover action
+        scrollToElement(driver, product2);
+        actions.moveToElement(product2).perform();
+        Assert.assertTrue(product2.isDisplayed());
 
+        WebElement Add_to_CartButton2 =driver.findElement(By.xpath("   //img[@alt='ecommerce website products']/..//p[text()='"+productname2+"']/../a"));
+        WaitForVisibilityOfElement(driver ,  Add_to_CartButton2  );
+        clickElement(driver, Add_to_CartButton2);
 
+        WaitForVisibilityOfElement(driver , Added_Message);
+        Assert.assertTrue(Added_Message.isDisplayed());
 
+        WaitForVisibilityOfElement(driver , ViewCart_button);
+        clickElement(driver,ViewCart_button);
 
+        Assert.assertEquals(Product_Added_toCart_List.size(),2);
 
+        WebElement Product1 = driver.findElement(By.xpath("//tbody/tr[contains(@id,'prod')]//a[text()='"+productname+"']"));
+        WaitForVisibilityOfElement(driver ,  Product1  );
+          Assert.assertTrue(Product1.isDisplayed());
 
+        WebElement Product2 = driver.findElement(By.xpath("//tbody/tr[contains(@id,'prod')]//a[text()='"+productname2+"']"));
+        WaitForVisibilityOfElement(driver , Product2  );
+        Assert.assertTrue(Product2.isDisplayed());
 
+        WaitForVisibilityOfElement(driver , Proceed_to_Checkout);
+        clickElement(driver, Proceed_to_Checkout);
 
-
-
-
-
-        return product.isDisplayed()
-                && View_product_details.isDisplayed()
-                &&Add_to_CartButton.isDisplayed();
     }
 
 

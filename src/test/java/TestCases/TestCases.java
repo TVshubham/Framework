@@ -1,10 +1,9 @@
+package TestCases;
+
 import Base.BaseClass;
 import Pages.API_List_Page;
 import Pages.HomePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -15,9 +14,8 @@ public class TestCases extends BaseClass {
 
 
 
-    @Test
+    @Test(description = "Verify API Documentation",priority =1)
     public void Testcase1() throws InterruptedException {
-
 
         HomePage home = new HomePage(driver);
         WaitForVisibilityOfElement(driver ,home.API_List_tab );
@@ -46,9 +44,8 @@ public class TestCases extends BaseClass {
         clickElement(driver , apiListPage.API_3);
         apiListPage.Verify_API_3_Get_APIDetails();
 
-
     }
-    @Test
+    @Test(description = "Verify Home Page Elements ",priority =2)
     public void TestCase2()
     {
         HomePage home = new HomePage(driver);
@@ -66,14 +63,11 @@ public class TestCases extends BaseClass {
 
     }
 
-    @Test
-    public void Testcase3()
-    {
+    @Test(description = "Verify Shopping Cart Flow for T-shirts",priority =3)
+    public void Testcase3() throws InterruptedException {
           HomePage homePage = new HomePage( driver);
           Assert.assertTrue( homePage.checkTshirtText());
-          Assert.assertTrue(homePage.check_VisibiltiyOf_Tshirt("Pure Cotton Neon Green Tshirt"));
-
-
+          homePage.check_Shopping_Cart_Flow ("Pure Cotton Neon Green Tshirt","Premium Polo T-Shirts");
 
     }
 
