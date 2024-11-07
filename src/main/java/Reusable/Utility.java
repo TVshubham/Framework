@@ -21,6 +21,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+
+
 public class Utility {
 
 
@@ -226,6 +228,11 @@ public class Utility {
         }
     }
 
+
+    public static void scrollToElement(WebDriver driver  ,  WebElement ele) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);",  ele);
+    }
 
 
 }
