@@ -37,8 +37,13 @@ public class BrowserFactory {
         {
 
 
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless"); // Run in headless mode
+//            options.addArguments("--window-size=1920,1080"); // Optional: set window size
 
-            driver = new ChromeDriver();
+            // Initialize WebDriver with Chrome options
+            driver = new ChromeDriver(options);
+//            driver = new ChromeDriver();
 
 
         }
@@ -61,12 +66,12 @@ public class BrowserFactory {
         }
         else {
 
-//            ChromeOptions chromeOptions = new ChromeOptions();
-////			chromeOptions.addArguments("--remote-allow-origins=*");
-//            chromeOptions.setCapability("browserVersion", "119.0");
-//            chromeOptions.setCapability("platformName", "linux");
-//
-//            driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless"); // Run in headless mode
+//            options.addArguments("--window-size=1920,1080"); // Optional: set window size
+
+            // Initialize WebDriver with Chrome options
+            WebDriver driver = new ChromeDriver(options);
             driver = new ChromeDriver();
         }
 
