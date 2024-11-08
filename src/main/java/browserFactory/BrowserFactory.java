@@ -42,7 +42,7 @@ public class BrowserFactory {
 //            options.addArguments("--window-size=1920,1080"); // Optional: set window size
 
             // Initialize WebDriver with Chrome options
-//            driver = new ChromeDriver(options);
+               driver = new ChromeDriver(options);
 //          driver = new ChromeDriver();
 
 
