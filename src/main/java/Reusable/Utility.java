@@ -72,26 +72,26 @@ public class Utility {
         return element;
     }
 
-    public static WebElement highlightElement(WebDriver driver,By locator)
-    {
-
-        WebElement element=driver.findElement(locator);
-
-        JavascriptExecutor js=(JavascriptExecutor)driver;
-
-        js.executeScript("arguments[0].setAttribute('style','background: yellow; border:2px solid red;')", element);
-
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        js.executeScript("arguments[0].setAttribute('style','border:2px solid white;')", element);
-
-        return element;
-    }
+//    public static WebElement highlightElement(WebDriver driver,By locator)
+//    {
+//
+//        WebElement element=driver.findElement(locator);
+//
+//        JavascriptExecutor js=(JavascriptExecutor)driver;
+//
+//        js.executeScript("arguments[0].setAttribute('style','background: yellow; border:2px solid red;')", element);
+//
+//        try {
+//            Thread.sleep(300);
+//        } catch (InterruptedException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+//
+//        js.executeScript("arguments[0].setAttribute('style','border:2px solid white;')", element);
+//
+//        return element;
+//    }
 
 
 
@@ -213,6 +213,9 @@ public class Utility {
         } catch (Exception e) {
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         }
+        HighlightElement(driver,element);
+
+
 
     }
     public void clickElementWithRetry(By locator, WebDriver driver) {
@@ -233,6 +236,30 @@ public class Utility {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);",  ele);
     }
+
+
+    public static void HighlightElement(WebDriver driver, WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        // Store original style to reset after highlighting
+        String originalStyle = element.getAttribute("style");
+
+        // Apply a new style to highlight
+        js.executeScript("arguments[0].setAttribute('style', arguments[1]);",
+                element, "border: 2px solid red; background-color: yellow;");
+
+        // Pause to observe the highlight effect
+        try {
+            Thread.sleep(500);  // Adjust the delay as needed
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Reset to the original style
+        js.executeScript("arguments[0].setAttribute('style', arguments[1]);",
+                element, originalStyle);
+    }
+
 
 
 }
